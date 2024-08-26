@@ -1,0 +1,84 @@
+{
+  "name": "i18n-duplicate-checker",
+  "displayName": "i18n-duplicate-checker",
+  "description": "Check duplicate i18n keys from common i18n files",
+  "author": "jrainlau@gmail.com",
+  "publisher": "Jrain Lau",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.92.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:json"
+  ],
+  "main": "./dist/extension.js",
+  "icon": "./public/icon.jpg",
+  "contributes": {
+    "commands": [
+      {
+        "command": "i18n-duplicate-checker.checkDuplicate",
+        "title": "Check i18n duplicate"
+      }
+    ],
+    "languages": [
+      {
+        "id": "json",
+        "extensions": [
+          ".json"
+        ],
+        "aliases": [
+          "JSON"
+        ]
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "i18n Duplicate Checker",
+      "properties": {
+        "i18nDuplicateChecker.i18nFolderPath": {
+          "type": "string",
+          "default": "frontend/apps/web/public/locales",
+          "description": "Path to the directory containing i18n files."
+        },
+        "i18nDuplicateChecker.commonI18nPaths": {
+          "type": "array",
+          "default": [
+            "frontend/apps/web/public/locales/en/common.json",
+            "frontend/apps/web/public/locales/zh/common.json"
+          ],
+          "description": "Path to the directory containing Common i18n files."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.7",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.92.0",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.11.0",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0",
+    "esbuild": "^0.21.5",
+    "eslint": "^8.57.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.4.5"
+  }
+}
