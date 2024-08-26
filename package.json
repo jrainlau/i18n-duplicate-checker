@@ -5,6 +5,10 @@
   "author": "jrainlau@gmail.com",
   "publisher": "Jrain Lau",
   "version": "1.0.0",
+  "repository": {
+   "type": "git",
+    "url": "https://github.com/jrainlau/i18n-duplicate-checker.git"
+  },
   "engines": {
     "vscode": "^1.92.0"
   },
@@ -15,7 +19,7 @@
     "onLanguage:json"
   ],
   "main": "./dist/extension.js",
-  "icon": "./public/icon.jpg",
+  "icon": "extension/icon.jpg",
   "contributes": {
     "commands": [
       {
