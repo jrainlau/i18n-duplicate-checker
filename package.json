@@ -3,7 +3,7 @@
   "displayName": "i18n-duplicate-checker",
   "description": "Check duplicate i18n keys from common i18n files",
   "author": "jrainlau@gmail.com",
-  "publisher": "Jrain Lau",
+  "publisher": "jrainlau",
   "version": "1.0.0",
   "repository": {
    "type": "git",
