@@ -1,11 +1,13 @@
 # i18n-duplicate-checker
 
-用于检查某个特定 i18n 文件的 key 是否已经和公共 i18n 文件的词条重复的 VSCode 插件。
+> [中文文档](./README.zh.md)
+
+A VSCode plugin for checking if keys in a specific i18n file are duplicated in the common i18n file.
 
 ![demo.gif](./docs/demo.gif)
 
-## 基本介绍
-在一般的 Web 项目中（如基于 NextJS 的项目），其 i18n 词条会以 Key-Value 的形式存放于特定文件中，如
+## Basic Introduction
+In general web projects (such as those based on NextJS), i18n entries are stored in specific files in a key-value format, such as:
 
 `locales/en/common.json`
 
@@ -23,26 +25,44 @@
 }
 ```
 
-这里的 `common.json` 默认会被所有模块引入。但是在具体的实践中，开发者往往会把不同模块的词条单独拆成对应的 i18n 文件，再按需加载。
+The `common.json` file here is imported by default in all modules. However, in practice, developers often separate the entries of different modules into corresponding i18n files and load them as needed.
 
-随着模块数量和词条的增加，很多时候模块对应的词条容已经在 `common.json` 中出现过，没必要再写一次。这个插件会自动检查某个模块 i18n 文件中的词条是否已经重复。
+As the number of modules and entries increases, many entries corresponding to modules may already exist in `common.json`, making it unnecessary to write them again. This plugin automatically checks if the entries in a module's i18n file are duplicated.
 
-## 插件配置
-1. 组合键 `Command + Shift + P` 后输入 `Open workspace settings`；
-2. 搜索设置 `i18n-duplicate-checker` 找到当前扩展，选择“在 settings.json 中编辑”;
-3. 编辑如下内容:
+## Plugin Configuration
+1. Press the combination `Command + Shift + P` and input `Open workspace settings`;
+2. Search for the setting `i18n-duplicate-checker`, find the current extension, and select "Edit in settings.json";
+3. Edit the content as follows:
   ```json
   {
-    // 这里写项目公共 i18n 文件的路径
+    // Specify the path to the common i18n files of the project here
     "i18nDuplicateChecker.commonI18nPaths": [
       "public/locales/en/common.json",
       "public/locales/zh/common.json"
     ],
-    // 这里写项目 i18n 目录的路径
+    // Specify the path to the i18n directory of the project here
     "i18nDuplicateChecker.i18nFolderPath": "public/locales"
   }
   ```
-  保存即可。
+  Save and you're done.
 
-## 使用
-任何位于 `i18nDuplicateChecker.i18nFolderPath` 中的 json 文件，都会自动被该插件实时检查，并通过 Warning 予以提示。点击提示上的链接，即可跳转到对应的公共 i18n 词条中。
+---
+
+If there are new language packs, simply add them to `i18nDuplicateChecker.commonI18nPaths`, like this:
+```json
+{
+  "i18nDuplicateChecker.commonI18nPaths": [
+    "public/locales/en/common.json",
+    "public/locales/zh/common.json",
+    "public/locales/jp/common.json"
+  ]
+}
+```
+
+> The module i18n entries edited in the same language pack directory will automatically associate with the `common.json` in the same language pack.
+
+## Usage
+Any JSON file located in the `i18nDuplicateChecker.i18nFolderPath` will be automatically checked in real-time by this plugin, and warnings will be provided for any duplicates. Clicking on the link in the warning will take you to the corresponding common i18n entry.
+
+## License
+MIT
